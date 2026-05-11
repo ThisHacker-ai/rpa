@@ -1,0 +1,109 @@
+----------------------------------------------------------------
+PRACTICAL 3(b): Create an Automation Using Looping Statements
+----------------------------------------------------------------
+
+AIM:
+To create a UiPath automation demonstrating different looping
+activities: While Loop, Do While Loop, and For Each.
+
+THEORY:
+Loops repeat a block of activities multiple times. UiPath provides:
+  - While:        Checks condition BEFORE executing body.
+  - Do While:     Executes body FIRST, then checks condition.
+  - For Each:     Iterates over each item in a collection.
+  - For Each Row: Iterates over rows in a DataTable.
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: looping_statements_demo
+  - Click "Create".
+
+Step 2: Create Variables
+  - In Variables tab, create:
+      Name: counter      Type: Int32     Default: 1
+      Name: output       Type: String    Default: ""
+      Name: fruits       Type: String[]  Default: {"Apple","Banana","Mango","Grapes"}
+
+--- DEMO 1: While Loop ---
+
+Step 3: Assign Initial Value
+  - Drag "Assign" activity.
+  - Set: counter = 1
+
+Step 4: Add While Activity
+  - Search and drag "While" activity onto the canvas.
+  - Condition: counter <= 5
+  - Inside the Body of While:
+      a. Drag "Assign" activity:
+         output = output + "Count: " + counter.ToString + Environment.NewLine
+      b. Drag another "Assign" activity:
+         counter = counter + 1
+
+Step 5: Display While Loop Result
+  - After the While loop, drag "Message Box".
+  - Text: "While Loop Output:" + Environment.NewLine + output
+
+--- DEMO 2: Do While Loop ---
+
+Step 6: Reset Variables
+  - Drag "Assign": counter = 1
+  - Drag "Assign": output = ""
+
+Step 7: Add Do While Activity
+  - Search and drag "Do While" activity.
+  - Inside the Body:
+      a. Drag "Assign":
+         output = output + "Do While Count: " + counter.ToString + Environment.NewLine
+      b. Drag "Assign": counter = counter + 1
+  - Set Condition (at the bottom of Do While): counter <= 5
+
+Step 8: Display Do While Result
+  - After Do While, drag "Message Box".
+  - Text: "Do While Loop Output:" + Environment.NewLine + output
+
+--- DEMO 3: For Each Loop ---
+
+Step 9: Reset output
+  - Drag "Assign": output = ""
+
+Step 10: Add For Each Activity
+  - Search and drag "For Each" activity.
+  - In the "Values" field, enter: fruits
+  - The loop variable will be "item" by default (type: Object).
+  - Inside the Body:
+      a. Drag "Assign":
+         output = output + item.ToString + Environment.NewLine
+
+Step 11: Display For Each Result
+  - After For Each, drag "Message Box".
+  - Text: "For Each Loop Output:" + Environment.NewLine + output
+
+Step 12: Run the Project
+  - Press F5.
+  - Three Message Boxes will appear showing:
+    1. While loop counting 1 to 5
+    2. Do While loop counting 1 to 5
+    3. For Each listing Apple, Banana, Mango, Grapes
+
+EXPECTED OUTPUT:
+  While Loop Output:
+    Count: 1
+    Count: 2
+    Count: 3
+    Count: 4
+    Count: 5
+
+  Do While Loop Output: (same as above)
+
+  For Each Loop Output:
+    Apple
+    Banana
+    Mango
+    Grapes
+
+================================================================
+END OF PRACTICAL NO. 3
+================================================================
