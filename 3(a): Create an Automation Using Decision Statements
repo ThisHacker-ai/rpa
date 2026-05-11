@@ -1,0 +1,95 @@
+================================================================
+PRACTICAL NO. 3
+MSC IT PART II SEM IV - ROBOTIC PROCESS AUTOMATION
+================================================================
+
+----------------------------------------------------------------
+PRACTICAL 3(a): Create an Automation Using Decision Statements
+----------------------------------------------------------------
+
+AIM:
+To create a UiPath automation that uses decision (conditional)
+statements - If Activity and Flow Decision - to make branching
+decisions based on user input.
+
+THEORY:
+Decision statements control the flow of execution based on
+conditions. In UiPath:
+  - "If" Activity: Evaluates a Boolean condition. Executes the
+    "Then" branch if True, and "Else" branch if False.
+  - "Flow Decision": Used in Flowcharts to create branching paths.
+  - Switch Activity: Similar to switch-case, branches based on
+    an integer or string value.
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: decision_statements_demo
+  - Click "Create".
+
+Step 2: Create Variables
+  - In the Variables tab at the bottom, create:
+      Name: ageStr     Type: String
+      Name: age        Type: Int32
+      Name: marksStr   Type: String
+      Name: marks      Type: Int32
+
+--- DEMO 1: Simple If-Else ---
+
+Step 3: Input Dialog for Age
+  - Drag "Input Dialog" onto the canvas.
+  - Properties:
+      * Dialog Title:  "Age Checker"
+      * Input Label:   "Enter your age:"
+      * Input Type:    Text Box
+      * Value Entered: ageStr
+
+Step 4: Convert String to Int
+  - Drag "Assign" activity.
+  - Set: age = Int32.Parse(ageStr)
+
+Step 5: Add If Activity
+  - Search and drag "If" activity.
+  - Condition: age >= 18
+  - Then branch: Add a "Message Box"
+      Text: "You are an Adult. You can vote!"
+  - Else branch: Add a "Message Box"
+      Text: "You are a Minor. You cannot vote yet."
+
+--- DEMO 2: Nested If (Grade System using Marks) ---
+
+Step 6: Input Dialog for Marks
+  - Drag "Input Dialog" below the first If activity.
+  - Properties:
+      * Dialog Title:  "Grade Calculator"
+      * Input Label:   "Enter your marks (out of 100):"
+      * Input Type:    Text Box
+      * Value Entered: marksStr
+
+Step 7: Convert Marks String to Int
+  - Drag "Assign" activity.
+  - Set: marks = Int32.Parse(marksStr)
+
+Step 8: Add Nested If for Grades
+  - Drag an "If" activity.
+  - Condition: marks >= 75
+  - Then: Message Box -> "Grade: Distinction (75 and above)"
+  - Else: Add ANOTHER "If" activity inside the Else branch:
+      Condition: marks >= 60
+      Then: Message Box -> "Grade: First Class (60-74)"
+      Else: Add ANOTHER "If" inside:
+          Condition: marks >= 45
+          Then: Message Box -> "Grade: Second Class (45-59)"
+          Else: Message Box -> "Grade: Fail (Below 45)"
+
+Step 9: Run the Project
+  - Press F5.
+  - Enter an age (e.g., 20) -> "You are an Adult. You can vote!"
+  - Enter marks (e.g., 80) -> "Grade: Distinction (75 and above)"
+
+EXPECTED OUTPUT:
+  For age = 20: "You are an Adult. You can vote!"
+  For marks = 80: "Grade: Distinction (75 and above)"
+
