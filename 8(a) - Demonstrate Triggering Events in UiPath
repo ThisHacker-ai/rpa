@@ -1,0 +1,100 @@
+================================================================
+PRACTICAL NO. 8 - EVENTS, SCREEN SCRAPING & PLUGINS IN UIPATH
+================================================================
+
+PRE-REQUISITES:
+- UiPath Studio installed
+- Chrome browser with UiPath Extension installed
+  (In UiPath Studio → Tools → UiPath Browser Extension → Install for Chrome)
+- UiPath packages: UiPath.UIAutomation.Activities, UiPath.Mail.Activities,
+  UiPath.PDF.Activities (install via Manage Packages)
+
+================================================================
+PRACTICAL 8(a) - Demonstrate Triggering Events in UiPath
+================================================================
+
+DIFFICULTY: Medium-Hard
+
+WHAT YOU WILL DO:
+You will demonstrate three types of event triggers:
+  (i)  Element Triggering Event (Click Trigger)
+  (ii) Image Triggering Event
+  (iii) System Triggering Event (Hotkey Trigger, Mouse Trigger)
+
+NOTE: Trigger activities run CONTINUOUSLY in the background and wait 
+for an event. They are used inside a "Monitor Events" or 
+"Trigger Scope" activity. The workflow pauses and waits 
+for the trigger to fire.
+
+--- (i) ELEMENT TRIGGERING EVENT - CLICK TRIGGER ---
+
+Step 1: Open UiPath Studio → New Project.
+  - Name it: Practical_8a_Events
+
+Step 2: Open Notepad on your computer.
+
+Step 3: In the sequence, drag a "Monitor Events" activity.
+  (If not found, search in Activities panel — it may be in UI Automation section)
+
+Step 4: Inside Monitor Events, in the EVENT HANDLER section,
+        drag a "Click Trigger" activity.
+  - Click "Indicate element on screen"
+  - Click on the Notepad text area.
+  - This means: "Watch for a click on Notepad's text area."
+
+Step 5: In the ACTION section of Monitor Events,
+        drag a "Message Box" activity.
+  - Text: "You clicked on Notepad!"
+
+Step 6: Run (F5).
+  - UiPath waits in the background.
+  - Click on the Notepad text area.
+  - The Message Box should pop up immediately.
+
+Step 7: Press Stop in UiPath to end the monitoring.
+
+--- (ii) IMAGE TRIGGERING EVENT ---
+
+Step 8: For Image Trigger, you need a reference screenshot.
+  - Take a screenshot of any visible button or icon on screen.
+  - Example: take a screenshot of Notepad's "Format" menu text.
+
+Step 9: Inside a new Monitor Events activity, drag an "Image Found Trigger".
+  - Click "Indicate image on screen"
+  - Draw a rectangle around the element/image you want to detect
+    (e.g., the word "Format" in Notepad's menu bar).
+  - UiPath will watch for this image to appear.
+
+Step 10: In the Action section, drag a "Message Box".
+  - Text: "Target image was detected on screen!"
+
+Step 11: Run (F5).
+  - UiPath waits.
+  - If that image appears on screen, the message box fires.
+
+--- (iii) SYSTEM TRIGGERING EVENTS ---
+
+HOTKEY TRIGGER:
+
+Step 12: Inside a new Monitor Events activity, drag a "Hotkey Trigger".
+  - Key: F10 (or any key you like)
+  - Modifier: None (or Ctrl, Alt, Shift — your choice)
+  - This watches for when you press that key.
+
+Step 13: In the Action section, drag a "Message Box".
+  - Text: "Hotkey was pressed!"
+
+Step 14: Run (F5) → Press F10 → Message Box appears.
+
+MOUSE TRIGGER:
+
+Step 15: Inside a new Monitor Events, drag a "Mouse Trigger".
+  - MouseButton: Left (watch for left mouse button)
+  - InputEvent: Click
+  - This fires when anywhere on the screen is clicked.
+
+Step 16: In Action section, drag a Message Box.
+  - Text: "Mouse click detected!"
+
+Step 17: Run (F5) → click anywhere → Message Box fires.
+
