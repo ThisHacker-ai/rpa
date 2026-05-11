@@ -1,0 +1,74 @@
+================================================================
+PRACTICAL 6(b) - Extract Data from Excel into DataTable and Vice Versa
+================================================================
+
+DIFFICULTY: Easy-Medium
+
+WHAT YOU WILL DO:
+You will read an Excel file into a DataTable, display it, 
+modify it, and write it back to a new Excel sheet.
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+PART 1 - SETUP
+
+Step 1: Use the same "students.xlsx" file from 6(a),
+        or create a new Excel file with:
+        A1: ID    B1: Name    C1: Score
+        A2: 1     B2: Alice   C2: 85
+        A3: 2     B3: Bob     C3: 90
+        A4: 3     B4: Charlie C4: 78
+        Save as "marks.xlsx" on Desktop.
+
+Step 2: Open UiPath Studio → New Project.
+  - Name it: Practical_6b_DataTable
+  - Click Create
+
+PART 2 - EXCEL TO DATATABLE (Read)
+
+Step 3: Drag an "Excel Application Scope" activity into the sequence.
+  - WorkbookPath: path to "marks.xlsx"
+
+Step 4: Inside the scope, drag "Read Range" activity.
+  - SheetName: "Sheet1"
+  - Range: "" (reads all data)
+  - AddHeaders: checked (tick this checkbox)
+  - Output → DataTable: press Ctrl+K → name it: dtMarks
+
+Step 5: After the Excel Application Scope, drag an "Output Data Table" activity.
+  - DataTable: dtMarks
+  - Output → Text: press Ctrl+K → name it: strOutput
+
+Step 6: Drag a "Message Box" activity.
+  - Text: strOutput
+  - Run (F5) → You should see a table with all 3 students and their scores.
+
+PART 3 - MODIFY THE DATATABLE
+
+Step 7: Drag a "For Each Row" activity after the Output Data Table.
+  - In: dtMarks
+  - Inside the For Each Row body, drag an "Assign" activity.
+    - Left side:  CurrentRow("Score")
+    - Right side: CInt(CurrentRow("Score")) + 5
+  - This adds 5 bonus marks to each student's score.
+
+PART 4 - DATATABLE TO EXCEL (Write back)
+
+Step 8: Drag another "Excel Application Scope" after the For Each Row loop.
+  - WorkbookPath: same "marks.xlsx" path
+
+Step 9: Inside this scope, drag "Write Range" activity.
+  - SheetName: "Sheet2"
+  - StartingCell: "A1"
+  - DataTable: dtMarks
+  - AddHeaders: checked
+
+Step 10: Run (F5).
+  - Open "marks.xlsx" → click on Sheet2
+  - You should see the updated scores (each score +5) written there.
+
+EXPECTED OUTPUT in Sheet2:
+  ID    Name      Score
+  1     Alice     90
+  2     Bob       95
+  3     Charlie   83
