@@ -1,0 +1,101 @@
+================================================================
+PRACTICAL NO. 2
+MSC IT PART II SEM IV - ROBOTIC PROCESS AUTOMATION
+================================================================
+
+----------------------------------------------------------------
+PRACTICAL 2(a): Automate UiPath Number Calculation
+              (Subtraction, Multiplication, Division)
+----------------------------------------------------------------
+
+AIM:
+To create a UiPath automation that accepts two numbers from the
+user and performs Subtraction, Multiplication, and Division,
+displaying each result in a Message Box.
+
+THEORY:
+UiPath supports mathematical operations using Assign activities
+and expressions. Variables of type Int32 or Double store numeric
+data. Operations are performed using standard operators:
+  - Subtraction:     a - b
+  - Multiplication:  a * b
+  - Division:        a / b   (use Double for decimal results)
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: number_calculations
+  - Click "Create".
+
+Step 2: Create Variables
+  - At the bottom, click the "Variables" tab.
+  - Create the following variables:
+      Name: num1       Type: Double    Default: (empty)
+      Name: num2       Type: Double    Default: (empty)
+      Name: num1Str    Type: String    Default: (empty)
+      Name: num2Str    Type: String    Default: (empty)
+      Name: result     Type: Double    Default: (empty)
+
+Step 3: Add Input Dialog for First Number
+  - Drag "Input Dialog" onto the sequence canvas.
+  - Properties:
+      * Dialog Title:  "Number Calculator"
+      * Input Label:   "Enter first number:"
+      * Input Type:    Text Box
+      * Value Entered: num1Str
+
+Step 4: Add Input Dialog for Second Number
+  - Drag another "Input Dialog" below the first.
+  - Properties:
+      * Dialog Title:  "Number Calculator"
+      * Input Label:   "Enter second number:"
+      * Input Type:    Text Box
+      * Value Entered: num2Str
+
+Step 5: Convert Strings to Double
+  - Drag an "Assign" activity below.
+  - Set:  num1 = Double.Parse(num1Str)
+  - Drag another "Assign" below.
+  - Set:  num2 = Double.Parse(num2Str)
+
+Step 6: Subtraction
+  - Drag an "Assign" activity.
+  - Set:  result = num1 - num2
+  - Drag a "Message Box" activity.
+  - Text: "Subtraction: " + num1.ToString + " - " + num2.ToString + " = " + result.ToString
+
+Step 7: Multiplication
+  - Drag an "Assign" activity.
+  - Set:  result = num1 * num2
+  - Drag a "Message Box" activity.
+  - Text: "Multiplication: " + num1.ToString + " * " + num2.ToString + " = " + result.ToString
+
+Step 8: Division
+  - Drag an "Assign" activity.
+  - Set:  result = num1 / num2
+  - Drag a "Message Box" activity.
+  - Text: "Division: " + num1.ToString + " / " + num2.ToString + " = " + result.ToString
+
+Step 9: Handle Division by Zero (Optional but Important)
+  - Before the division Assign, drag an "If" activity.
+  - Condition: num2 = 0
+  - In the "Then" branch, add a Message Box: "Cannot divide by zero!"
+  - Move the Division Assign and Message Box into the "Else" branch.
+
+Step 10: Run the Project
+  - Press F5.
+  - Enter first number (e.g., 10) and click OK.
+  - Enter second number (e.g., 2) and click OK.
+  - Three Message Boxes will appear:
+      "Subtraction: 10 - 2 = 8"
+      "Multiplication: 10 * 2 = 20"
+      "Division: 10 / 2 = 5"
+
+EXPECTED OUTPUT:
+  For inputs 10 and 2:
+    Subtraction result: 8
+    Multiplication result: 20
+    Division result: 5
+
