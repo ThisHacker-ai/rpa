@@ -1,0 +1,95 @@
+================================================================
+PRACTICAL NO. 10 - LOGGING, SCREENSHOTS, STATE MACHINE & PUBLISH
+================================================================
+
+PRE-REQUISITES:
+- UiPath Studio installed
+- UiPath Orchestrator account (free Community edition at cloud.uipath.com)
+  (Required only for 10(c) - Publish)
+- Any application to automate (Notepad works for all parts)
+
+================================================================
+PRACTICAL 10(a) - Automate Process Logging and Taking Screenshots
+================================================================
+
+DIFFICULTY: Easy
+
+WHAT YOU WILL DO:
+You will create a workflow that:
+1. Logs messages at different stages (Info, Warning, Error levels)
+2. Takes and saves a screenshot automatically during the workflow
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+PART 1 - LOGGING
+
+Step 1: Open Notepad on your computer.
+
+Step 2: Open UiPath Studio → New Project.
+  - Name it: Practical_10a_LoggingScreenshots
+  - Click Create
+
+Step 3: From the Activities panel, search "Log Message" and drag it 
+        into the Main sequence.
+
+Step 4: In the Log Message properties:
+  - Level: Info
+  - Message: "Workflow started - Practical 10a"
+
+Step 5: After the Log Message, drag an "Open Application" or 
+        "Type Into" activity (we'll just use Type Into on Notepad).
+  - Drag "Type Into" → Indicate Notepad text area
+  - Text: "Hello from UiPath!"
+
+Step 6: Add another "Log Message" after the Type Into.
+  - Level: Info
+  - Message: "Text typed into Notepad successfully."
+
+Step 7: Drag one more "Log Message".
+  - Level: Warn
+  - Message: "This is a warning log — check if Notepad is saved."
+
+Step 8: Run (F5).
+  - After the run, look at the OUTPUT PANEL at the bottom of UiPath Studio.
+  - You will see all your log messages with timestamps and levels.
+  - Info → blue  |  Warn → yellow  |  Error → red
+
+Step 9 (Bonus — Log to File):
+  - You can also log to a text file using a "Write Text File" activity.
+  - Before each important step, add:
+    Drag "Write Text File"
+      FileName: "C:\Users\YourName\Desktop\log.txt"
+      Text: "[" + Now.ToString + "] Step completed"
+      Append: True (check this so each log adds to the file, not overwrites)
+
+PART 2 - SCREENSHOTS
+
+Step 10: From Activities, search "Take Screenshot" and drag it 
+         into the sequence (after one of the Type Into steps).
+
+Step 11: In Take Screenshot properties:
+  - Drag it AFTER your "Type Into" activity so it captures the state.
+  - Output → Image: press Ctrl+K → name it: screenImg
+
+Step 12: After Take Screenshot, drag "Save Image" activity.
+  - Image: screenImg
+  - FileName: "C:\Users\YourName\Desktop\screenshot_" + Now.ToString("yyyyMMdd_HHmmss") + ".png"
+  - This saves the screenshot with a timestamp in the filename.
+
+Step 13: Add another "Log Message" after Save Image.
+  - Level: Info
+  - Message: "Screenshot saved to Desktop."
+
+Step 14: Run (F5).
+  - Check your Desktop → a PNG screenshot file should be saved there.
+  - The Output panel shows all log messages.
+
+FULL SEQUENCE SUMMARY:
+  [Log Message - "Workflow started"]
+  [Type Into - Notepad]
+  [Log Message - "Text typed"]
+  [Take Screenshot]
+  [Save Image]
+  [Log Message - "Screenshot saved"]
+  [Log Message - "Workflow completed"]
+
