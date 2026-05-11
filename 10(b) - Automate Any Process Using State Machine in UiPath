@@ -1,0 +1,110 @@
+================================================================
+PRACTICAL 10(b) - Automate Any Process Using State Machine in UiPath
+================================================================
+
+DIFFICULTY: Hard
+
+WHAT YOU WILL DO:
+You will build a simple vending machine simulation using 
+State Machine in UiPath.
+
+States:
+  State 1: Idle         → waiting for user input
+  State 2: Processing   → processing the selection
+  State 3: Dispensing   → giving the item
+  Final State: Done
+
+--- WHAT IS A STATE MACHINE? ---
+  A State Machine is a type of workflow where the automation can 
+  be in one of several STATES at any time.
+  Transitions between states happen based on CONDITIONS.
+  Each state has Entry and Exit actions.
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+Step 1: Open UiPath Studio → New Project.
+  - Name it: Practical_10b_StateMachine
+  - Click Create
+
+Step 2: Delete the default Sequence and select "State Machine" 
+        as the root type.
+  - In the Designer area, right-click → select "Add Activity" → 
+    search "State Machine" and add it.
+  OR:
+  - Create a new project and in the initial dialog, choose 
+    "State Machine" template instead of "Blank Process".
+
+Step 3: You'll see a State Machine canvas. Right-click → 
+        "Add State" to add your states.
+
+ADDING STATE 1 - IDLE:
+
+Step 4: Double-click to add a State → rename it "Idle".
+  - Double-click the Idle state to open its editor.
+  - In the ENTRY section, drag an "Input Dialog" activity.
+    - Title: "Vending Machine"
+    - Label: "Select item: 1=Water, 2=Juice, 3=Soda"
+    - Result: press Ctrl+K → name it: userChoice (type: String)
+  - Click the back arrow to return to the State Machine canvas.
+
+ADDING STATE 2 - PROCESSING:
+
+Step 5: Add another state → rename it "Processing".
+  - Double-click to open it.
+  - In the ENTRY section, drag a "Message Box".
+    - Text: "Processing your selection: " + userChoice
+  - Click back.
+
+ADDING STATE 3 - DISPENSING:
+
+Step 6: Add another state → rename it "Dispensing".
+  - Double-click to open it.
+  - In the ENTRY section, drag an "If" activity.
+    - Condition: userChoice = "1"
+    - THEN: Message Box → Text: "Dispensing Water. Enjoy!"
+    - ELSE: 
+        Add another If:
+        - Condition: userChoice = "2"
+        - THEN: Message Box → Text: "Dispensing Juice. Enjoy!"
+        - ELSE: Message Box → Text: "Dispensing Soda. Enjoy!"
+  - Click back.
+
+ADDING FINAL STATE:
+
+Step 7: Add a "Final State" (there should be a built-in option 
+        when you right-click).
+  - This ends the State Machine.
+
+ADDING TRANSITIONS (ARROWS):
+
+Step 8: Hover over the Idle state — you'll see a small arrow/handle appear.
+  - Drag from Idle → to Processing.
+  - A transition line appears. Click on it to edit.
+  - Condition: Not String.IsNullOrEmpty(userChoice)
+    (i.e., move to Processing only if user entered something)
+
+Step 9: Drag transition from Processing → to Dispensing.
+  - Condition: True  (always move after processing)
+
+Step 10: Drag transition from Dispensing → to Final State.
+  - Condition: True
+
+Step 11: Set the Initial State:
+  - Right-click on "Idle" state → "Set as Initial State"
+  - This is where the State Machine starts.
+
+Step 12: Run (F5).
+  EXPECTED FLOW:
+  1. Input dialog appears (Idle state)
+  2. User types "1" → clicks OK
+  3. "Processing your selection: 1" message appears
+  4. "Dispensing Water. Enjoy!" message appears
+  5. State Machine ends.
+
+TIPS:
+  - Each state can have ENTRY (runs when you enter the state) 
+    and EXIT (runs when you leave the state) sections.
+  - Transitions have CONDITIONS — the first true condition fires.
+  - State machines are great for workflows with multiple possible 
+    paths (like login retry logic, multi-step forms, etc.)
+
