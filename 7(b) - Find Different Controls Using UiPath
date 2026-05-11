@@ -1,0 +1,68 @@
+================================================================
+PRACTICAL 7(b) - Find Different Controls Using UiPath
+================================================================
+
+DIFFICULTY: Medium
+
+WHAT YOU WILL DO:
+You will use three "Find" activities:
+  (i)  Find Element
+  (ii) Find Children
+  (iii) Find Ancestor
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+SETUP: Open Notepad (Windows key → Notepad → Enter)
+
+Step 1: Open UiPath Studio → New Project.
+  - Name it: Practical_7b_FindControls
+
+--- (i) FIND ELEMENT ---
+
+Step 2: Drag a "Find Element" activity into the sequence.
+  - Click "Indicate element on screen"
+  - Click anywhere on the Notepad text area (the big white typing area)
+  - UiPath captures the element's selector automatically.
+
+Step 3: In the Output section of Find Element:
+  - Click the FoundElement field → press Ctrl+K → name it: foundEl
+
+Step 4: Drag a "Message Box" activity after Find Element.
+  - Text: "Element found: " + foundEl.GetType().Name
+  - This shows what type of UI element was found.
+
+Step 5: Run (F5).
+  - A message box will confirm the element was found.
+
+--- (ii) FIND CHILDREN ---
+
+Step 6: Drag a "Find Children" activity after the Message Box.
+  - Click "Indicate element on screen"
+  - This time, click on the Notepad WINDOW TITLE BAR (the blue bar at the top)
+  - This selects the parent window.
+
+Step 7: In the Output → Children field:
+  - Press Ctrl+K → name: childList
+
+Step 8: Drag a "Message Box" after Find Children.
+  - Text: "Number of child elements: " + childList.Count.ToString
+  - This shows how many child UI elements Notepad has.
+
+Step 9: Run (F5).
+  - A message box will show the count of children (buttons, text area, etc.)
+
+--- (iii) FIND ANCESTOR ---
+
+Step 10: Drag a "Find Ancestor" activity.
+  - Click "Indicate element on screen"
+  - Click on the Notepad text area (the inner white box)
+  - This finds the PARENT of that inner element.
+
+Step 11: In the Output section → press Ctrl+K → name: ancestorEl
+
+Step 12: Drag a "Message Box":
+  - Text: "Ancestor found: " + ancestorEl.GetType().Name
+
+Step 13: Run (F5).
+  - The ancestor of the text area is the Notepad window itself.
+
