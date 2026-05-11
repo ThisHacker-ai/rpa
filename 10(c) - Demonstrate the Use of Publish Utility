@@ -1,0 +1,101 @@
+================================================================
+PRACTICAL 10(c) - Demonstrate the Use of Publish Utility
+================================================================
+
+DIFFICULTY: Easy
+
+WHAT YOU WILL DO:
+You will publish a UiPath project to UiPath Orchestrator 
+(or publish locally as a NuGet package).
+
+--- WHAT IS PUBLISH? ---
+  Publishing packages your UiPath workflow into a .nupkg file 
+  and uploads it to Orchestrator (or a local feed).
+  From Orchestrator, the robot can be scheduled and run on any machine.
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+PRE-SETUP (First-time only):
+
+Step 1: Create a free UiPath Cloud account:
+  - Go to: https://cloud.uipath.com
+  - Click "Sign Up" → use your email to register.
+  - Once logged in, you'll see the Orchestrator dashboard.
+
+Step 2: Connect UiPath Studio to Orchestrator:
+  - In UiPath Studio → top right corner → click your profile icon 
+    or "Sign In"
+  - Sign in with your cloud.uipath.com account.
+  - Studio will automatically connect to your Orchestrator.
+
+--- PUBLISHING YOUR PROJECT ---
+
+Step 3: Open any project in UiPath Studio 
+  (use the Practical_10a project or any earlier one).
+
+Step 4: In the top ribbon, click the "PUBLISH" button.
+  (It's in the Design or Home ribbon, usually has a cloud/arrow icon)
+
+Step 5: The Publish dialog opens. You'll see:
+
+  PACKAGE PROPERTIES:
+  - Package Name: auto-filled with your project name (e.g., Practical_10a)
+  - Package Version: 1.0.0 (you can change this)
+    - Increment for updates: 1.0.1, 1.0.2 etc.
+
+  PUBLISH TO:
+  - Select "Orchestrator Tenant Processes Feed" 
+    (this publishes to your cloud Orchestrator)
+  OR
+  - Select "Custom URL" and use a local path to save the .nupkg file locally.
+
+Step 6: Click "PUBLISH".
+  - UiPath packages your workflow.
+  - A success message appears: "Package successfully published."
+
+Step 7: Verify in Orchestrator:
+  - Go to https://cloud.uipath.com → Your Tenant → Packages
+  - You should see your published package listed there.
+
+Step 8: Create a Process from the Package:
+  - In Orchestrator → Automations → Processes → click "+"
+  - Select your published package → click Create.
+  - Now you can schedule it to run at specific times!
+
+--- ALTERNATIVE: PUBLISH LOCALLY ---
+
+Step 9: If you don't want to use cloud:
+  - In Publish dialog → Publish To → Custom URL
+  - Enter a local folder path: C:\Users\YourName\Desktop\MyPackages
+  - Click Publish.
+  - A .nupkg file is created in that folder.
+  - This can be deployed on any UiPath Robot manually.
+
+--- HOW TO RUN A PUBLISHED PACKAGE ---
+
+Step 10: In Orchestrator → Jobs → Start Job
+  - Select your Process.
+  - Click "Start" → the robot runs the workflow.
+
+Step 11 (Run locally from package):
+  - Open UiPath Assistant (system tray icon)
+  - Your published package should appear.
+  - Click Play/Run to execute it.
+
+================================================================
+EXTRA NOTES FOR PRACTICAL 10:
+================================================================
+- Log Message levels: Trace < Info < Warn < Error < Fatal
+  In production, typically log Info for milestones and Error for failures.
+- Screenshots are helpful for audit trails — save them with timestamps 
+  so you can review what the robot saw at each step.
+- State Machine vs Sequence vs Flowchart:
+    Sequence    → linear steps (one after another)
+    Flowchart   → branching logic (if/else paths)
+    State Machine → complex workflows with multiple stable states
+  Use State Machine when your process has clearly defined modes/phases.
+- When publishing, always update the version number (1.0.0 → 1.0.1) 
+  so Orchestrator knows it's a new version.
+- Publishing to Orchestrator is what makes UiPath truly enterprise-grade — 
+  you can schedule, monitor, and manage robots from a central dashboard.
+================================================================
