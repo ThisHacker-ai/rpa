@@ -1,0 +1,84 @@
+----------------------------------------------------------------
+PRACTICAL 1(c): Create a UiPath Robot to Empty a Gmail Folder
+              Using Recording
+----------------------------------------------------------------
+
+AIM:
+To create a UiPath automation using the Recording feature that
+opens Gmail in a browser and deletes/empties a specific folder
+(e.g., Spam or Promotions).
+
+THEORY:
+UiPath Recording is a feature that records your mouse clicks and
+keyboard inputs and converts them into automation activities
+automatically. Web Recording is used for browser-based applications
+like Gmail. The Basic Recording option captures individual UI
+interactions.
+
+PRE-REQUISITES:
+- Google Chrome with UiPath Chrome Extension installed.
+  (In UiPath Studio: Tools > UiPath Extensions > Chrome)
+- A Gmail account you can log into.
+- You should already be logged into Gmail in Chrome.
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: gmail_folder_empty_recording
+  - Click "Create".
+
+Step 2: Open Gmail in Chrome
+  - Open Google Chrome manually.
+  - Go to https://mail.google.com and log in.
+  - Navigate to the folder you want to empty (e.g., click "Spam"
+    in the left sidebar).
+
+Step 3: Start Web Recording in UiPath
+  - In UiPath Studio, go to the Design tab.
+  - Click "Recording" > "Web".
+  - The Recording toolbar will appear at the top of your screen.
+
+Step 4: Record the Click on "Select All" Checkbox
+  - Click "Click" in the Recording toolbar.
+  - On Gmail, click the checkbox at the top left (Select All checkbox).
+  - This selects all visible emails.
+
+Step 5: Record Clicking "Select all conversations"
+  - After selecting all, Gmail shows a link:
+    "Select all X conversations in Spam"
+  - Click "Click" in the Recording toolbar.
+  - Click that link in Gmail to select ALL emails (not just visible ones).
+
+Step 6: Record Clicking "Delete Forever" or "Empty Spam Now"
+  - Click "Click" in Recording toolbar.
+  - Click the "Delete forever" button (for Spam) or "Empty Spam now"
+    button that appears in Gmail.
+
+Step 7: Handle Confirmation Dialog (if any)
+  - Gmail may show a confirmation dialog: "OK" to confirm deletion.
+  - In Recording toolbar, click "Click".
+  - Click the "OK" button in the dialog.
+
+Step 8: Stop Recording
+  - Press Escape or click "Save & Exit" in the Recording toolbar.
+  - UiPath will generate the sequence of activities automatically.
+
+Step 9: Run the Project
+  - Make sure Chrome is open and Gmail Spam folder is visible.
+  - Press F5 in UiPath Studio.
+  - The bot will automatically perform all clicks you recorded.
+
+EXPECTED OUTPUT:
+  The selected Gmail folder (Spam/Promotions) will be emptied.
+  All emails in that folder will be deleted.
+
+NOTE:
+  - If selectors break, use UiPath's "Indicate on Screen" to
+    re-select the element.
+  - Always run this on a test account to avoid accidental deletion.
+
+================================================================
+END OF PRACTICAL NO. 1
+================================================================
