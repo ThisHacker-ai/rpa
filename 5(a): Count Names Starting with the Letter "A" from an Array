@@ -1,0 +1,134 @@
+================================================================
+PRACTICAL NO. 5
+MSC IT PART II SEM IV - ROBOTIC PROCESS AUTOMATION
+================================================================
+
+----------------------------------------------------------------
+PRACTICAL 5(a): Count Names Starting with the Letter "A" from an Array
+----------------------------------------------------------------
+
+AIM:
+To create a UiPath automation that takes an array of names,
+counts how many names start with the letter "a" (case-insensitive),
+and displays the result in a Message Box.
+
+THEORY:
+Arrays in UiPath are fixed-size collections of the same data type.
+You can iterate over an array using "For Each". String methods like
+.StartsWith() and .ToLower() are used for character checking.
+A counter variable (Int32) is incremented each time a condition
+is met, and the final count is displayed.
+
+LOGIC:
+  For each name in the array:
+    If name starts with "a" (or "A"):
+      increment counter
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: count_names_starting_with_a
+  - Click "Create".
+
+Step 2: Create Variables
+  - Click the "Variables" tab at the bottom of the Designer.
+  - Create the following variables:
+
+      Name: names        Type: String[]    Default: (see Step 3)
+      Name: count        Type: Int32       Default: 0
+      Name: nameList     Type: String      Default: ""
+
+Step 3: Set the Array Default Value
+  - For the "names" variable, click on the Default column.
+  - Enter the following (exactly as shown, with curly braces):
+      {"Alice", "Bob", "Andrew", "Anna", "Charlie", "asha", "David", "amy"}
+  - This creates an array of 8 names.
+
+Step 4: Initialize Counter
+  - Drag an "Assign" activity onto the sequence canvas.
+  - Set: count = 0
+  - Drag another "Assign":
+  - Set: nameList = ""
+
+Step 5: Add For Each Activity
+  - Search "For Each" in the Activities panel.
+  - Drag it onto the canvas below the Assign activities.
+  - In the "Values" field, type: names
+  - The iteration variable is "item" (type: Object by default).
+  - Change item type to String if possible, or use item.ToString below.
+
+Step 6: Add If Activity Inside the For Each Body
+  - Inside the Body of For Each, drag an "If" activity.
+  - Condition:
+      item.ToString.ToLower.StartsWith("a")
+    (This checks if the name starts with "a" or "A" by converting
+     to lowercase first.)
+
+Step 7: Then Branch - Increment Counter
+  - Inside the "Then" section of the If activity:
+    a. Drag "Assign":
+       count = count + 1
+    b. Drag another "Assign":
+       nameList = nameList + item.ToString + ", "
+
+Step 8: Else Branch - Leave Empty
+  - The "Else" branch can remain empty (no action needed).
+
+Step 9: Display the Result After the Loop
+  - After the For Each activity (outside it), drag a "Message Box".
+  - Text:
+      "Total names starting with 'A': " + count.ToString +
+      Environment.NewLine +
+      "Names: " + nameList
+
+Step 10: Run the Project
+  - Press F5 (or click Run).
+  - No input needed — the array is hardcoded.
+  - A Message Box will appear showing the count.
+
+EXPECTED OUTPUT:
+  For the array: {"Alice", "Bob", "Andrew", "Anna", "Charlie", "asha", "David", "amy"}
+
+  Message Box will show:
+  "Total names starting with 'A': 5
+   Names: Alice, Andrew, Anna, asha, amy, "
+
+  (5 names start with A or a: Alice, Andrew, Anna, asha, amy)
+
+----------------------------------------------------------------
+ADDITIONAL CHALLENGE (Optional Extension):
+----------------------------------------------------------------
+
+You can extend this practical by:
+
+a) Reading names from a text file using "Read Text File" activity
+   and splitting by comma/newline.
+
+b) Reading names from an Excel sheet using "Read Range" activity
+   and iterating over the DataTable rows.
+
+c) Accepting names dynamically via multiple Input Dialogs.
+
+----------------------------------------------------------------
+IMPORTANT NOTES:
+----------------------------------------------------------------
+
+1. .StartsWith() is case-sensitive by default.
+   Always use .ToLower().StartsWith("a") to handle both "A" and "a".
+
+2. Array indexing in UiPath starts at 0.
+   names(0) gives the first element.
+
+3. String[] arrays are fixed size. If you need a dynamic list,
+   use List(Of String) instead:
+     Type: System.Collections.Generic.List<String>
+     Initialize with: New List(Of String)
+
+4. The For Each activity's item variable is of type Object.
+   Always use item.ToString when using it in string operations.
+
+================================================================
+END OF PRACTICAL NO. 5
+================================================================
