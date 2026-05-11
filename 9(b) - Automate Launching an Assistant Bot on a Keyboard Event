@@ -1,0 +1,55 @@
+================================================================
+PRACTICAL 9(b) - Automate Launching an Assistant Bot on a Keyboard Event
+================================================================
+
+DIFFICULTY: Medium
+
+WHAT YOU WILL DO:
+You will create a bot that stays in the background and launches 
+(opens Notepad and types a greeting) whenever you press a specific 
+keyboard shortcut (e.g., Ctrl + Alt + N).
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+Step 1: Open UiPath Studio → New Project.
+  - Name it: Practical_9b_KeyboardBot
+  - Click Create
+
+Step 2: From the Activities panel, drag a "Monitor Events" activity 
+        into the Main sequence.
+  - This activity keeps running in background and listens for events.
+
+Step 3: Inside the Monitor Events activity, in the TRIGGER section:
+  - Drag a "Hotkey Trigger" activity.
+  - Key: select "n" from the dropdown
+  - Modifiers: check both "Ctrl" AND "Alt" checkboxes
+  - This means: trigger when user presses Ctrl + Alt + N
+
+Step 4: In the ACTION section of Monitor Events:
+  - Drag an "Open Application" activity.
+    - Click "Indicate element on screen" or type the path directly:
+    - FileName: "notepad.exe"
+    - This opens Notepad when the hotkey is pressed.
+  
+  - After Open Application, drag "Type Into" activity.
+    - Indicate element: click inside the Notepad text area.
+    - Text: "Hello! The assistant bot is activated. Ready to help!"
+
+  - Drag a "Message Box" at the end.
+    - Text: "Bot launched successfully via keyboard shortcut!"
+
+Step 5: Run (F5).
+  - UiPath will appear to be doing nothing — it is waiting in the background.
+  - Press Ctrl + Alt + N on your keyboard.
+  - Notepad should open and the bot should type the message automatically.
+  - The Message Box will appear.
+
+Step 6: To stop the bot, click the Stop button in UiPath Studio.
+
+ALTERNATIVE APPROACH (simpler — if Monitor Events is not available):
+  Step A: Drag "Hotkey Trigger" directly into a "Trigger Scope" activity.
+  Step B: Set the Key and Modifiers as above.
+  Step C: In the body, add the Open Application + Type Into steps.
+
+.
+================================================================
