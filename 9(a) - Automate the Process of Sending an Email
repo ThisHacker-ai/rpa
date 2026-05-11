@@ -1,0 +1,82 @@
+================================================================
+PRACTICAL NO. 9 - SEND MAIL, KEYBOARD EVENTS & EXCEPTION HANDLING
+================================================================
+
+PRE-REQUISITES:
+- UiPath Studio installed
+- UiPath.Mail.Activities installed (Manage Packages → search Mail → Install)
+- A Gmail account (with App Password if 2FA is on)
+- Chrome browser with UiPath Extension
+
+================================================================
+PRACTICAL 9(a) - Automate the Process of Sending an Email
+================================================================
+
+DIFFICULTY: Easy-Medium
+
+WHAT YOU WILL DO:
+You will create a UiPath workflow that automatically sends an email
+using Gmail's SMTP server.
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+Step 1: Set up Gmail App Password (if your Gmail has 2-Step Verification ON):
+  - Go to: https://myaccount.google.com
+  - Click Security → 2-Step Verification → scroll down → App Passwords
+  - Select App: Mail  |  Device: Windows Computer
+  - Click Generate → copy the 16-character password shown.
+  - Use THIS password in UiPath, not your regular Gmail password.
+
+Step 2: Open UiPath Studio → New Project.
+  - Name it: Practical_9a_SendMail
+  - Click Create
+
+Step 3: Install Mail Activities (if not already):
+  - Manage Packages → search "UiPath.Mail.Activities" → Install → Save
+
+Step 4: From the Activities panel, search for "Send SMTP Mail Message"
+        and drag it into the Main sequence.
+
+Step 5: Fill in the activity properties (click on the activity to see them 
+        on the right side):
+
+  TO:         "recipient@gmail.com"   ← put your own email to test
+  SUBJECT:    "Test Email from UiPath"
+  BODY:       "Hello! This email was automatically sent by UiPath RPA."
+  
+  SMTP Settings (expand the SMTP section):
+  HOST:       "smtp.gmail.com"
+  PORT:       587
+  EnableSSL:  True (check the checkbox)
+  
+  USERNAME:   "yourgmail@gmail.com"
+  PASSWORD:   (see Step 6 below for how to enter securely)
+
+Step 6: To handle password securely:
+  - Before the Send SMTP activity, drag an "Assign" activity.
+  - Left side (variable name): securePass  (Type: SecureString)
+  - Right side (value): 
+      New System.Net.NetworkCredential("", "your_app_password_here").SecurePassword
+  - In the Send SMTP activity → Password field: securePass
+
+Step 7: (Optional) Add an attachment:
+  - In Send SMTP Mail Message → Attachments field:
+  - Type: New List(Of String) From {"C:\Users\YourName\Desktop\sample.pdf"}
+  - This attaches a file from your Desktop.
+
+Step 8: Drag a "Message Box" AFTER the Send SMTP activity.
+  - Text: "Email sent successfully!"
+
+Step 9: Run (F5).
+  - Wait a few seconds.
+  - Check your email inbox — the email should arrive.
+  - The Message Box "Email sent successfully!" will also appear.
+
+COMMON ERRORS AND FIXES:
+  Error: "5.7.8 Username and Password not accepted"
+  Fix:   Use App Password (not normal Gmail password). Or enable 
+         "Less secure app access" in Google Account settings.
+
+  Error: "Connection refused" or timeout
+  Fix:   Check port (587 for TLS, 465 for SSL) and EnableSSL setting.
+
