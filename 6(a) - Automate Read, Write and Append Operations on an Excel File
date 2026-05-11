@@ -1,0 +1,131 @@
+================================================================
+PRACTICAL NO. 6 - EXCEL AUTOMATION IN UIPATH
+================================================================
+
+PRE-REQUISITES:
+- UiPath Studio installed (Community Edition is free)
+- Microsoft Excel installed
+- UiPath.Excel.Activities package installed
+  (In Studio → Manage Packages → search "Excel" → Install)
+
+================================================================
+PRACTICAL 6(a) - Automate Read, Write and Append Operations on an Excel File
+================================================================
+
+DIFFICULTY: Easy-Medium
+
+WHAT YOU WILL DO:
+You will create a UiPath workflow that:
+1. READS data from an existing Excel file
+2. WRITES new data into the Excel file
+3. APPENDS additional data at the end of existing data
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+PART 1 - SETUP
+
+Step 1: Create a sample Excel file first.
+  - Open Microsoft Excel
+  - In Sheet1, type the following in cells A1 to A5:
+      A1: Name
+      A2: Alice
+      A3: Bob
+      A4: Charlie
+      A5: Diana
+  - Save the file as "students.xlsx" on your Desktop
+
+Step 2: Open UiPath Studio.
+  - Click "New Project" → Select "Process"
+  - Name it: Practical_6a_ExcelOperations
+  - Click Create
+
+Step 3: Make sure the Excel Activities package is installed.
+  - Go to Manage Packages (top ribbon)
+  - Search for "UiPath.Excel.Activities"
+  - If not installed, click Install → Save
+
+PART 2 - READ OPERATION
+
+Step 4: In the Designer panel, drag an "Excel Application Scope" activity 
+        into the Main sequence.
+  - In the "WorkbookPath" field, click the folder icon and browse to 
+    your "students.xlsx" file on the Desktop.
+    OR type the full path in quotes: "C:\Users\YourName\Desktop\students.xlsx"
+
+Step 5: Inside the Excel Application Scope, drag a "Read Range" activity.
+  - Set SheetName to: "Sheet1"
+  - Set Range to: "" (empty string means read all data)
+  - In the Output section, click the DataTable field → click Ctrl+K 
+    to create a new variable → name it: dtStudents
+
+Step 6: After the Excel Application Scope, drag a "Message Box" activity.
+  - In the Text field type: dtStudents.Rows.Count.ToString + " rows read from Excel"
+  - This will show how many rows were read.
+
+Step 7: Run the workflow (F5 or press Run button).
+  - A message box should appear saying "5 rows read from Excel"
+  - This confirms the READ operation is working.
+
+PART 3 - WRITE OPERATION
+
+Step 8: Go back inside the Excel Application Scope.
+  - After the Read Range activity, drag a "Write Cell" activity.
+  - Set SheetName: "Sheet1"
+  - Set Cell: "B1"
+  - Set Value: "Grade"
+  - This writes the header "Grade" into cell B1.
+
+Step 9: Drag another "Write Cell" activity below the previous one.
+  - Cell: "B2"  → Value: "A"
+  Drag another:
+  - Cell: "B3"  → Value: "B"
+  Drag another:
+  - Cell: "B4"  → Value: "A+"
+  Drag another:
+  - Cell: "B5"  → Value: "B+"
+
+Step 10: Run the workflow (F5).
+  - Open "students.xlsx" — you should see the Grade column filled in.
+
+PART 4 - APPEND OPERATION
+
+Step 11: Create a DataTable to append.
+  - Before the Excel Application Scope, drag a "Build Data Table" activity.
+  - Click "DataTable" button to open the builder.
+  - Add Column: Name it "Name" (String type)
+  - Add a row: type "Eve" under Name
+  - Click OK
+  - In Output → DataTable field, press Ctrl+K → name it: dtNewRow
+
+Step 12: Inside the Excel Application Scope, after the Write Cell activities,
+         drag an "Append Range" activity.
+  - SheetName: "Sheet1"
+  - DataTable: dtNewRow
+  - This will add "Eve" at the end of the existing list.
+
+Step 13: Run the workflow (F5).
+  - Open "students.xlsx" — you should see "Eve" added in row 6.
+
+EXPECTED FINAL OUTPUT:
+  Column A        Column B
+  Name            Grade
+  Alice           A
+  Bob             B
+  Charlie         A+
+  Diana           B+
+  Eve             (blank — just appended name)
+
+
+
+================================================================
+EXTRA NOTES FOR PRACTICAL 6:
+================================================================
+- "Excel Application Scope" is the container for all Excel activities.
+  Always put your Read/Write activities INSIDE it.
+- "Read Range" reads into a DataTable (like a table in memory).
+- "Write Range" writes a full DataTable back to Excel.
+- "Append Range" adds rows at the bottom of existing data.
+- "Write Cell" writes one specific cell at a time.
+- Always save Excel file BEFORE running UiPath if you want fresh data.
+- If you get an error about Excel being open, close the Excel file first.
+================================================================
