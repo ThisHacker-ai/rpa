@@ -1,0 +1,58 @@
+================================================================
+PRACTICAL NO. 7 - WINDOW ACTIVITIES, CONTROLS & MOUSE/KEYBOARD IN UIPATH
+================================================================
+
+PRE-REQUISITES:
+- UiPath Studio installed
+- A simple application open (Notepad works perfectly for all parts)
+- UiPath.UIAutomation.Activities package installed (usually default)
+
+================================================================
+PRACTICAL 7(a) - Implement the Attach Window Activity
+================================================================
+
+DIFFICULTY: Easy
+
+WHAT YOU WILL DO:
+You will use "Attach Window" to target an already-open application window
+and perform actions inside it (type text into Notepad).
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+Step 1: Open Notepad on your computer.
+  - Press Windows key → type "Notepad" → press Enter
+  - Leave it open (don't type anything yet)
+
+Step 2: Open UiPath Studio → New Project.
+  - Name it: Practical_7a_AttachWindow
+  - Click Create
+
+Step 3: In the Designer panel, drag an "Attach Window" activity 
+        into the Main sequence.
+
+Step 4: Click "Indicate Window on Screen" inside the Attach Window activity.
+  - Your screen will dim and a blue border will appear as you hover.
+  - Move your mouse over the Notepad window and LEFT CLICK on it.
+  - UiPath will now remember this window as the target.
+
+Step 5: Inside the Attach Window activity's body (the white area inside),
+        drag a "Type Into" activity.
+  - Click "Indicate element inside window"
+  - Move mouse to the white text area of Notepad and click it.
+  - In the "Text" field of Type Into, type: "Hello from UiPath Attach Window!"
+
+Step 6: Below the Type Into, drag a "Send Hotkey" activity (still inside Attach Window).
+  - Key: select "s" from the dropdown
+  - Check the "Ctrl" modifier checkbox
+  - This simulates Ctrl+S to save the file.
+
+Step 7: Run the workflow (F5).
+  EXPECTED RESULT: Notepad opens, the text is typed into it,
+  and then Ctrl+S is pressed (a Save dialog will appear — 
+  you can manually close it or add more steps to handle it).
+
+WHY USE ATTACH WINDOW?
+  - It locks your automation to a specific window.
+  - Even if other windows are on top, UiPath will bring this window to focus.
+  - Very useful in multi-window environments.
+
