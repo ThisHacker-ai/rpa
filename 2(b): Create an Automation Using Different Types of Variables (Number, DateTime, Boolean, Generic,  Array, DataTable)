@@ -1,0 +1,98 @@
+----------------------------------------------------------------
+PRACTICAL 2(b): Create an Automation Using Different Types of
+               Variables (Number, DateTime, Boolean, Generic,
+               Array, DataTable)
+----------------------------------------------------------------
+
+AIM:
+To demonstrate the use of different variable types in UiPath:
+Int32 (Number), DateTime, Boolean, Object (Generic), Array of
+String, and DataTable.
+
+THEORY:
+UiPath supports a rich set of variable types:
+  - Int32 / Double: Numeric values
+  - DateTime: Stores date and time values
+  - Boolean: True or False
+  - Object (Generic): Can hold any type of data
+  - Array of String (String[]): Collection of strings
+  - DataTable: Table with rows and columns (like a spreadsheet)
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: variable_types_demo
+  - Click "Create".
+
+Step 2: Create All Required Variables
+  - Click the "Variables" tab at the bottom.
+  - Create these variables:
+      Name: myNumber      Type: Int32        Default: 42
+      Name: myDate        Type: DateTime     Default: Now
+      Name: myBool        Type: Boolean      Default: True
+      Name: myObject      Type: Object       Default: (empty)
+      Name: myArray       Type: String[]     Default: {"Alice","Bob","Charlie"}
+      Name: myTable       Type: DataTable    Default: (empty)
+      Name: output        Type: String       Default: (empty)
+
+Step 3: Demonstrate Int32 (Number Variable)
+  - Add a "Message Box" activity.
+  - Text: "Number variable: " + myNumber.ToString
+  - This displays: "Number variable: 42"
+
+Step 4: Demonstrate DateTime Variable
+  - Add a "Message Box" activity.
+  - Text: "DateTime variable: " + myDate.ToString("dd/MM/yyyy HH:mm:ss")
+  - This displays current date and time.
+
+Step 5: Demonstrate Boolean Variable
+  - Add an "If" activity.
+  - Condition: myBool = True
+  - Then branch: Add Message Box with text "Boolean is True"
+  - Else branch: Add Message Box with text "Boolean is False"
+
+Step 6: Demonstrate Generic (Object) Variable
+  - Add an "Assign" activity.
+  - Set: myObject = "This is a generic/object variable"
+  - Add a "Message Box".
+  - Text: "Object variable: " + myObject.ToString
+
+Step 7: Demonstrate Array Variable
+  - Add a "Message Box".
+  - Text: "Array element 0: " + myArray(0) + ", Element 1: " + myArray(1)
+  - This shows: "Array element 0: Alice, Element 1: Bob"
+
+Step 8: Demonstrate DataTable Variable
+  - Add a "Build Data Table" activity (search in Activities panel).
+  - In the DataTable designer that opens:
+      * Click "Add Column" and add columns: Name (String), Age (Int32)
+      * Click "Add Row" and add a row: Alice, 25
+      * Click "Add Row" and add another row: Bob, 30
+      * Click OK.
+  - Set the Output to: myTable
+
+  - Add a "For Each Row" activity (search: For Each Row in Data Table).
+  - Configure it to iterate over myTable.
+  - Inside the body, add an "Assign":
+      output = output + row("Name").ToString + " is " + row("Age").ToString + " years old. "
+  - After the loop, add a "Message Box":
+      Text: "DataTable contents: " + output
+
+Step 9: Run the Project
+  - Press F5.
+  - Multiple Message Boxes will appear one by one demonstrating
+    each variable type.
+
+EXPECTED OUTPUT:
+  - "Number variable: 42"
+  - "DateTime variable: [today's date and time]"
+  - "Boolean is True"
+  - "Object variable: This is a generic/object variable"
+  - "Array element 0: Alice, Element 1: Bob"
+  - "DataTable contents: Alice is 25 years old. Bob is 30 years old."
+
+================================================================
+END OF PRACTICAL NO. 2
+================================================================
