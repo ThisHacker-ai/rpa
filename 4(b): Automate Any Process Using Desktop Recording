@@ -1,0 +1,68 @@
+----------------------------------------------------------------
+PRACTICAL 4(b): Automate Any Process Using Desktop Recording
+----------------------------------------------------------------
+
+AIM:
+To use UiPath Desktop Recording to automate interactions with a
+Windows desktop application (e.g., Calculator).
+
+THEORY:
+Desktop Recording wraps all recorded actions inside an "Attach
+Window" container. This ensures that all activities target the
+same application window, making it more reliable than Basic
+Recording for desktop apps.
+
+PRE-REQUISITES:
+- Windows Calculator app
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: desktop_recording_demo
+  - Click "Create".
+
+Step 2: Open Calculator
+  - Press Windows key, type "Calculator", press Enter.
+  - The Calculator app opens.
+
+Step 3: Start Desktop Recording
+  - In UiPath Studio, click "Recording" > "Desktop".
+  - Desktop Recording toolbar appears.
+
+Step 4: Indicate the Window to Attach
+  - UiPath will prompt you to indicate the window.
+  - Click anywhere on the Calculator window.
+  - An "Attach Window" container is created in the workflow.
+
+Step 5: Record Button Clicks for Calculation (e.g., 5 + 3)
+  - In the Recording toolbar, click "Click".
+  - Click the "5" button on the Calculator.
+  - Click "Click" again in the toolbar.
+  - Click the "+" button.
+  - Click "Click" again.
+  - Click the "3" button.
+  - Click "Click" again.
+  - Click the "=" button.
+
+Step 6: Record Getting the Result (Optional)
+  - The result "8" appears in the display.
+  - Use "Get Text" from the Recording toolbar to capture this value.
+  - Click the result display area.
+  - Store it in a variable named: calcResult (String type)
+
+Step 7: Display the Result
+  - Press Escape to stop recording.
+  - After the Attach Window container, manually add a "Message Box".
+  - Text: "Calculator Result: " + calcResult
+
+Step 8: Run
+  - Press F5.
+  - The bot will open Calculator, click 5 + 3 =, and show the result.
+
+EXPECTED OUTPUT:
+  Calculator shows: 8
+  Message Box shows: "Calculator Result: 8"
+
+-
