@@ -1,0 +1,79 @@
+================================================================
+PRACTICAL NO. 4
+MSC IT PART II SEM IV - ROBOTIC PROCESS AUTOMATION
+================================================================
+
+----------------------------------------------------------------
+PRACTICAL 4(a): Automate Any Process Using Basic Recording
+----------------------------------------------------------------
+
+AIM:
+To use UiPath Basic Recording to automate opening Notepad,
+typing text, and saving the file.
+
+THEORY:
+Basic Recording in UiPath captures individual clicks and keystrokes
+on any application (desktop or web). Unlike Web or Desktop
+recordings, Basic recording does NOT use containers (Attach Window/
+Browser). Each action is recorded individually. It is useful for
+simple one-off automations across multiple applications.
+
+PRE-REQUISITES:
+- Notepad (built into Windows)
+- UiPath Studio installed
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: basic_recording_demo
+  - Click "Create".
+
+Step 2: Open Notepad Manually
+  - Press Windows key + R, type "notepad", press Enter.
+  - Notepad should be open and visible on screen.
+
+Step 3: Start Basic Recording
+  - In UiPath Studio, go to the "Design" tab in the top ribbon.
+  - Click "Recording" > "Basic".
+  - The Basic Recording toolbar appears at the top of the screen.
+
+Step 4: Record Clicking Inside Notepad
+  - Click "Click" in the Recording toolbar.
+  - Click inside the white area of Notepad (the text editing area).
+  - UiPath will highlight the element in blue and record the click.
+
+Step 5: Record Typing Text
+  - Click "Type" in the Recording toolbar.
+  - Click inside Notepad's text area.
+  - A dialog box appears asking what to type.
+  - Type: "Hello! This is a Basic Recording demo in UiPath."
+  - Click OK.
+
+Step 6: Record Saving the File (Ctrl+S)
+  - Click "Type" in the Recording toolbar.
+  - Click inside Notepad.
+  - In the dialog, leave text blank and set special keys.
+  - Click the "Special Keys" checkbox or manually type: [k(ctrl+s)]
+  - (Alternatively, use "Send Hotkey" from the toolbar if available.)
+
+Step 7: Handle Save Dialog (if file is unsaved)
+  - If Notepad shows a "Save As" dialog:
+    * Click "Click" in Recording toolbar.
+    * Click the "Save" button.
+
+Step 8: Stop Recording
+  - Press Escape or click "Save & Exit".
+  - UiPath generates the sequence of activities.
+
+Step 9: Run
+  - Close Notepad if open (to test fresh).
+  - Re-open Notepad manually.
+  - Press F5 in UiPath Studio.
+  - The bot will click in Notepad and type the text automatically.
+
+EXPECTED OUTPUT:
+  Notepad will contain the text:
+  "Hello! This is a Basic Recording demo in UiPath."
+
