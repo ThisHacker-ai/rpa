@@ -1,0 +1,89 @@
+----------------------------------------------------------------
+PRACTICAL 1(b): Create a Flowchart Based Project
+----------------------------------------------------------------
+
+AIM:
+To create a flowchart-based project in UiPath that uses decision
+(Flow Decision) nodes to implement a number-guessing game.
+
+THEORY:
+A Flowchart in UiPath allows non-linear execution using decision
+nodes (Flow Decision). It is represented visually with a Start node,
+activities, and diamond-shaped Flow Decision nodes for branching.
+Flow Decisions evaluate a Boolean condition and branch to True/False.
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: a_flowchart_based_project
+  - Click "Create".
+
+Step 2: Change Workflow Type to Flowchart
+  - In the Activities panel, search for "Flowchart".
+  - Drag "Flowchart" onto the blank Main.xaml canvas.
+  - OR: Right-click the canvas > select "Add Activity" > "Flowchart".
+  - A green "Start" bubble will appear at the top.
+
+Step 3: Set a Variable for the Secret Number
+  - At the bottom of the Designer, click "Variables" tab.
+  - Create a variable:
+      Name: secretNumber    Type: Int32    Default: 7
+  - Create another variable:
+      Name: guessStr        Type: String
+  - Create another variable:
+      Name: guess           Type: Int32
+
+Step 4: Add an Input Dialog Activity
+  - In the Activities panel, search "Input Dialog".
+  - Drag it into the Flowchart canvas below Start.
+  - Connect Start to Input Dialog by hovering over Start, then
+    dragging the arrow to the Input Dialog box.
+  - In Properties:
+      * Dialog Title:  "Number Guessing Game"
+      * Input Label:   "Guess a number between 1 and 10:"
+      * Input Type:    Text Box
+      * Value Entered: guessStr
+
+Step 5: Add an Assign Activity to Convert String to Int
+  - Drag an "Assign" activity below the Input Dialog.
+  - Connect Input Dialog to Assign.
+  - In Properties:
+      * To:    guess
+      * Value: Int32.Parse(guessStr)
+
+Step 6: Add a Flow Decision (First Decision)
+  - Search "Flow Decision" and drag it onto the canvas.
+  - Connect the Assign activity to this Flow Decision.
+  - In Properties, set Condition: guess = secretNumber
+
+Step 7: Add Message Box for Correct Guess (True Branch)
+  - Drag a "Message Box" activity onto the canvas.
+  - Connect the True arrow of Flow Decision to this Message Box.
+  - In Properties:
+      * Text: "Congrats, you guessed the right number !!"
+
+Step 8: Add a Second Flow Decision (False Branch - Too High/Low)
+  - Drag another "Flow Decision" onto the canvas.
+  - Connect the False arrow of the first Flow Decision to it.
+  - In Properties, set Condition: guess < secretNumber
+
+Step 9: Message Box for Too Low (True Branch of 2nd Decision)
+  - Drag a "Message Box" and connect to True of 2nd Flow Decision.
+  - Text: "Your guess is too low. Try again!"
+
+Step 10: Message Box for Too High (False Branch of 2nd Decision)
+  - Drag a "Message Box" and connect to False of 2nd Flow Decision.
+  - Text: "Your guess is too high. Try again!"
+
+Step 11: Run the Project
+  - Press F5 to run.
+  - Enter a number when prompted.
+  - If correct: "Congrats, you guessed the right number !!"
+  - If wrong: appropriate message appears.
+
+EXPECTED OUTPUT:
+  If the user enters 7 (the secret number):
+  "Congrats, you guessed the right number !!"
+
