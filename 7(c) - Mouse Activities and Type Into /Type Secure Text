@@ -1,0 +1,83 @@
+================================================================
+PRACTICAL 7(c) - Mouse Activities and Type Into / Type Secure Text
+================================================================
+
+DIFFICULTY: Easy
+
+WHAT YOU WILL DO:
+You will simulate Mouse Click, Double Click, Hover, Type Into, 
+and Type Secure Text using Notepad and Calculator.
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+PART 1 - MOUSE CLICK, DOUBLE CLICK, HOVER
+
+Step 1: Open Notepad on your computer.
+
+Step 2: Open UiPath Studio → New Project.
+  - Name it: Practical_7c_MouseKeyboard
+
+Step 3: From the Activities panel, search "Click" and drag a 
+        "Click" activity into the sequence.
+  - Click "Indicate element on screen"
+  - Click anywhere on the Notepad text area.
+  - CursorMotionType: Instant (default)
+  - This simulates a single LEFT click on Notepad.
+
+Step 4: Drag a "Double Click" activity below.
+  - Click "Indicate element on screen"
+  - If you have any word typed in Notepad, indicate that word.
+  - A double-click on a word selects it.
+  - (Tip: First add a Type Into to type some text, then Double Click to select)
+
+Step 5: Drag a "Hover" activity below.
+  - Click "Indicate element on screen"
+  - Hover over the Notepad Format menu (the word "Format" in the menu bar).
+  - This simulates hovering — the menu will highlight but not open.
+
+PART 2 - TYPE INTO
+
+Step 6: Drag a "Type Into" activity.
+  - Click "Indicate element on screen" → click the Notepad text area.
+  - In the Text field, type: "This is typed by UiPath automation."
+  - Run (F5) → watch UiPath type the sentence into Notepad automatically.
+
+Step 7: In the Type Into Properties panel on the right:
+  - SimulateType: True (this types instantly, not character by character)
+  - EmptyField: True (this clears any existing text before typing)
+
+PART 3 - TYPE SECURE TEXT
+
+Step 8: Open a website that has a password field.
+  - Open Chrome → go to: https://the-internet.herokuapp.com/login
+  - Username: admin   Password: admin (it's a test website)
+
+Step 9: In UiPath, drag a "Type Into" activity.
+  - Indicate the Username field on the website.
+  - Text: "admin"
+
+Step 10: Drag a "Type Secure Text" activity.
+  - Indicate the Password field on the website.
+  - In the Password field: click the field → type the password 
+    (UiPath will store it as a SecureString, hiding characters).
+  - To input a hardcoded secure string:
+    Use an Assign activity first:
+      Left:  myPassword (type: SecureString)
+      Right: New System.Net.NetworkCredential("","admin").SecurePassword
+  - Then in Type Secure Text → Password: myPassword
+
+Step 11: Run (F5).
+  - Watch UiPath fill in the username and then the password (which will appear as dots).
+
+================================================================
+EXTRA NOTES FOR PRACTICAL 7:
+================================================================
+- "Attach Window" is essential when working with specific open windows.
+  Always indicate the correct window, not just any part of the screen.
+- "Find Element" is used to verify an element exists before interacting.
+- "Find Children" lists all UI elements INSIDE a parent container.
+- "Find Ancestor" finds the PARENT of a given element.
+- "Type Into" types visible text. Use "SimulateType=True" for speed.
+- "Type Secure Text" is for passwords — the text is never stored as plain string.
+- Always use "Indicate element on screen" to point UiPath to the right UI element.
+================================================================
