@@ -1,0 +1,100 @@
+================================================================
+PRACTICAL 9(c) - Demonstrate Exception Handling in UiPath
+================================================================
+
+DIFFICULTY: Medium
+
+WHAT YOU WILL DO:
+You will demonstrate TWO types of exception handling:
+  (i)  Array Index Out of Bounds exception
+  (ii) Division by Zero exception
+
+--- STEP-BY-STEP INSTRUCTIONS ---
+
+PART 1 - TRY CATCH ACTIVITY
+
+Step 1: Open UiPath Studio → New Project.
+  - Name it: Practical_9c_ExceptionHandling
+
+Step 2: From the Activities panel, search "Try Catch" and drag it 
+        into the Main sequence.
+  - A Try Catch activity has 3 sections:
+    TRY     → put the code that might throw an error
+    CATCHES → define what happens when a specific error occurs
+    FINALLY → runs regardless (cleanup code)
+
+--- (i) ARRAY INDEX OUT OF BOUNDS ---
+
+Step 3: Inside the TRY section, drag an "Assign" activity.
+  - Create a variable: myArray (type: Array of [Int32])
+  - In the Assign:
+    - Left: myArray
+    - Right: New Integer() {10, 20, 30}
+    (This creates an array with 3 elements at index 0, 1, 2)
+
+Step 4: Inside TRY, below Assign, drag another "Assign" activity.
+  - Left: result (type: Int32)
+  - Right: myArray(5)
+  ← This tries to access index 5 which doesn't exist → will throw an error
+
+Step 5: Click the "+" button in the CATCHES section.
+  - Exception Type: System.IndexOutOfRangeException
+    (Start typing "IndexOutOfRange" and select from dropdown)
+  - Inside the catch body, drag a "Message Box".
+    - Text: "Error caught! Array index is out of range. 
+             The array only has 3 elements (index 0-2)."
+
+Step 6: In the FINALLY section (optional):
+  - Drag a "Message Box" → Text: "Finally block executed — cleanup done."
+
+Step 7: Run (F5).
+  - The error will be caught gracefully.
+  - Message Box will show the friendly error message.
+  - Then the Finally block message will appear.
+  - The workflow will NOT crash!
+
+--- (ii) DIVISION BY ZERO EXCEPTION ---
+
+Step 8: Add a new "Try Catch" activity below the first one.
+
+Step 9: In the TRY section:
+  - Drag an "Assign" activity.
+  - Left: divResult (type: Int32)
+  - Right: 10 / 0
+  ← Dividing by zero throws DivideByZeroException
+
+Step 10: In the CATCHES section → click "+" to add exception type.
+  - Exception Type: System.DivideByZeroException
+  - Inside catch body, drag "Message Box":
+    - Text: "Error caught! Cannot divide by zero. 
+             Please check your input values."
+
+Step 11: Run (F5).
+  - The division by zero error is caught.
+  - Friendly message appears instead of a crash.
+
+SUMMARY TABLE:
+  Exception Type                  | What causes it
+  --------------------------------|-------------------------------
+  System.IndexOutOfRangeException | Accessing array index that doesn't exist
+  System.DivideByZeroException    | Dividing a number by zero
+  System.NullReferenceException   | Using a variable that has no value (null)
+  System.Exception                | Catch-all for any error
+
+BEST PRACTICES:
+  - Always use specific exception types (not just System.Exception) 
+    when you know what error to expect.
+  - Use the FINALLY block for cleanup (closing files, logging, etc.)
+  - Log errors using "Log Message" activity for production workflows.
+
+================================================================
+EXTRA NOTES FOR PRACTICAL 9:
+================================================================
+- For Send Mail: always test with your own email first (both To and From 
+  set to the same Gmail) so you can see the result immediately.
+- Hotkey Trigger keeps the robot alive in background — it won't stop 
+  unless you manually stop it or add a specific stop condition.
+- Exception Handling is CRUCIAL for professional automation. 
+  Without it, one unexpected error crashes your entire workflow.
+- Try Catch in UiPath = try-catch-finally in Python/Java — same concept.
+- The "Throw" activity lets you manually raise exceptions too
