@@ -1,0 +1,86 @@
+================================================================
+PRACTICAL NO. 1
+MSC IT PART II SEM IV - ROBOTIC PROCESS AUTOMATION
+================================================================
+
+----------------------------------------------------------------
+PRACTICAL 1(a): Create a Simple Sequence Based Project
+----------------------------------------------------------------
+
+AIM:
+To create a simple sequence-based project in UiPath Studio that
+accepts user input and displays a message using a sequence workflow.
+
+THEORY:
+A Sequence in UiPath is a linear workflow where activities are
+executed one after another from top to bottom. It is the simplest
+workflow type, ideal for straightforward automation tasks. Activities
+like Input Dialog and Message Box are commonly used in sequences.
+
+PRE-REQUISITES:
+- UiPath Studio installed (Community Edition is free)
+- Windows OS
+
+STEPS:
+
+Step 1: Open UiPath Studio
+  - Double-click the UiPath Studio icon on your desktop.
+  - If not installed, go to https://www.uipath.com/start-trial and
+    download the Community Edition. Sign in / create a free account.
+
+Step 2: Create a New Project
+  - On the Home screen, click "New Project".
+  - Select "Process".
+  - In the Name field, type: simple_sequence_based_project
+  - Leave the Location as default (Documents > UiPath).
+  - Click "Create".
+
+Step 3: The Designer Opens
+  - UiPath opens with a blank Main.xaml file.
+  - By default, it opens in Sequence layout. You will see an empty
+    canvas with a "+" (Add activity) icon.
+
+Step 4: Add the First Activity - Input Dialog (for Hair Color)
+  - In the Activities panel (left or top), search for "Input Dialog".
+  - Drag and drop "Input Dialog" onto the canvas (inside the sequence).
+  - In the Properties panel (right side), set:
+      * Dialog Title:  "Question"
+      * Input Label:   "Enter your Hair color"
+      * Input Type:    Text Box
+      * Value Entered: color    (this is the output variable name)
+  - When you type "color" in Value Entered, UiPath will ask you to
+    create a variable. Press Ctrl+K or click "Set var" and name it: color
+  - Make sure the variable type is String.
+
+Step 5: Add the Second Activity - Input Dialog (for Age)
+  - Drag another "Input Dialog" activity below the first one.
+  - In Properties:
+      * Dialog Title:  "Question"
+      * Input Label:   "Enter your age:"
+      * Input Type:    Text Box
+      * Value Entered: age
+  - Create variable "age" as type String when prompted.
+
+Step 6: Add the Third Activity - Message Box
+  - Search for "Message Box" in the Activities panel.
+  - Drag and drop it below the second Input Dialog.
+  - In the Text field (Properties), type the following expression:
+      "Hello, you are " + age.ToString + " years old, your hair color is " + color
+  - Note: Use the Expression Editor (click the ... button next to Text)
+    to type this if needed.
+
+Step 7: Run the Project
+  - Click the "Run" button (green play button) in the top toolbar,
+    OR press F5.
+  - A dialog box will appear asking "Enter your Hair color" — type a
+    color (e.g., black) and click OK.
+  - Another dialog will appear asking "Enter your age:" — type a number
+    (e.g., 22) and click OK.
+  - A Message Box will display:
+    "Hello, you are 22 years old, your hair color is black"
+  - Click OK to close.
+
+EXPECTED OUTPUT:
+  A Message Box showing:
+  "Hello, you are 22 years old, your hair color is black"
+
