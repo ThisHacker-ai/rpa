@@ -1,0 +1,132 @@
+================================================================
+PRACTICAL 8(c) - Install and Automate Using UiPath Plugins
+================================================================
+
+DIFFICULTY: Hard (covers 7 plugins)
+
+WHAT YOU WILL DO:
+Demonstrate automation using 7 plugins:
+Mail, PDF, Excel, Word, Web, Java, Credential Management
+
+--- PLUGIN INSTALLATION ---
+
+Step 1: In UiPath Studio → click "Manage Packages" (top ribbon).
+  - Search and install each of these:
+    * UiPath.Mail.Activities
+    * UiPath.PDF.Activities
+    * UiPath.Excel.Activities  (likely already installed)
+    * UiPath.Word.Activities
+    * UiPath.WebAPI.Activities
+  - For Java Plugin: UiPath Studio → Tools → Java Extension → Install
+  - Click Save after installing.
+
+Step 2: Open UiPath Studio → New Project.
+  - Name it: Practical_8c_Plugins
+
+--- MAIL PLUGIN ---
+
+Step 3: From Activities, drag "Send SMTP Mail Message".
+  - To: "yourtestemail@gmail.com"
+  - Subject: "Test from UiPath"
+  - Body: "Hello, this email was sent by UiPath automation."
+  - SMTPServer: "smtp.gmail.com"
+  - Port: 587
+  - EnableSSL: True
+  - Username: "yourgmail@gmail.com"
+  - Password: "your_app_password"
+    (Note: Use a Gmail App Password — go to myaccount.google.com → Security → App Passwords)
+  - Run (F5) → check your email inbox.
+
+--- PDF PLUGIN ---
+
+Step 4: Create a sample PDF or download any PDF file. 
+  Save it as "sample.pdf" on Desktop.
+
+Step 5: From Activities, drag "Read PDF Text" activity.
+  - FileName: "C:\Users\YourName\Desktop\sample.pdf"
+  - Output → Text: press Ctrl+K → name it: pdfText
+
+Step 6: Drag a "Message Box" → Text: pdfText
+  - Run (F5) → see the extracted PDF text.
+
+--- EXCEL PLUGIN ---
+
+Step 7: (Already covered in Practical 6 — refer to those steps)
+  Quick demo: Use "Excel Application Scope" + "Read Range" + "Message Box".
+
+--- WORD PLUGIN ---
+
+Step 8: Create a sample Word document. Type some text. Save as "doc1.docx".
+
+Step 9: From Activities, drag "Word Application Scope".
+  - FilePath: "C:\Users\YourName\Desktop\doc1.docx"
+
+Step 10: Inside Word Application Scope, drag "Read Text" activity.
+  - Output → Text: press Ctrl+K → name it: wordText
+
+Step 11: Drag Message Box after the scope → Text: wordText
+  - Run (F5) → the text from your Word file is shown.
+
+--- WEB INTEGRATION ---
+
+Step 12: Open Chrome browser → navigate to https://example.com
+
+Step 13: Drag an "Open Browser" activity (or use Attach Browser 
+         if already open).
+  - URL: "https://example.com"
+  - BrowserType: Chrome
+
+Step 14: Inside Open Browser, drag "Get Text" activity.
+  - Indicate element on screen → click the heading text on example.com
+  - Output → Ctrl+K → name it: webText
+
+Step 15: Drag Message Box → Text: webText
+  - Run (F5) → extracts text from the webpage.
+
+--- JAVA PLUGIN ---
+
+Step 16: Install UiPath Java Extension:
+  - UiPath Studio → Tools → Java Extension → Install
+  - Restart Studio.
+
+Step 17: Open any Java application on your computer 
+  (or use a simple Java Swing app if available).
+  - UiPath can now interact with Java application UI elements 
+    the same way it interacts with Windows apps.
+  - Use "Click", "Type Into", "Get Text" activities — they will 
+    now work on Java apps too after extension is installed.
+
+--- CREDENTIAL MANAGEMENT ---
+
+Step 18: To securely store credentials:
+  - Open Windows Credential Manager 
+    (Windows Search → "Credential Manager" → Windows Credentials)
+  - Click "Add a generic credential"
+    Internet/network address: "MyAppLogin"
+    Username: "testuser"
+    Password: "testpassword"
+  - Click OK.
+
+Step 19: In UiPath, drag "Get Secure Credential" activity.
+  - Target: "MyAppLogin"
+  - Output → Username: press Ctrl+K → name it: storedUser
+  - Output → Password: press Ctrl+K → name it: storedPass
+
+Step 20: Drag "Message Box" → Text: storedUser
+  - Run (F5) → UiPath retrieves the stored username securely.
+  - The password is retrieved as SecureString (never shown in plain text).
+
+================================================================
+EXTRA NOTES FOR PRACTICAL 8:
+================================================================
+- Events are used to REACT to user actions — they don't click themselves.
+  They listen and then trigger your automation workflow.
+- Screen Scraping Wizard is the easiest way to use Full Text/Native/OCR.
+  Access it from the top Design ribbon in UiPath Studio.
+- Full Text is fast but may grab hidden text. Native is cleaner.
+  Use OCR only when the other two don't work (e.g., on images).
+- For Mail Plugin, Gmail requires an App Password (not your normal password)
+  if 2FA is enabled. Create one at myaccount.google.com → Security.
+- Credential Management is important for secure automation — 
+  NEVER hardcode passwords directly in your workflow.
+================================================================
