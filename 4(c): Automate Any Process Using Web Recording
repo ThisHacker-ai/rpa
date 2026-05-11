@@ -1,0 +1,65 @@
+---------------------------------------------------------------
+PRACTICAL 4(c): Automate Any Process Using Web Recording
+----------------------------------------------------------------
+
+AIM:
+To use UiPath Web Recording to automate a web-based task in
+Google Chrome — specifically, searching for a term on Google.
+
+THEORY:
+Web Recording wraps all recorded actions inside an "Open Browser"
+or "Attach Browser" container. It is optimized for web automation
+and generates reliable selectors for web elements.
+
+PRE-REQUISITES:
+- Google Chrome browser.
+- UiPath Chrome Extension installed.
+  (Go to UiPath Studio: Tools > UiPath Extensions > Chrome > Install)
+
+STEPS:
+
+Step 1: Create a New Project
+  - Open UiPath Studio.
+  - Click "New Project" > "Process".
+  - Name it: web_recording_demo
+  - Click "Create".
+
+Step 2: Open Google Chrome
+  - Open Chrome and go to: https://www.google.com
+
+Step 3: Start Web Recording
+  - In UiPath Studio, click "Recording" > "Web".
+  - The Web Recording toolbar appears.
+
+Step 4: Indicate the Browser
+  - Click "Indicate Browser" or "Open Browser" in the toolbar.
+  - Click anywhere on the Chrome window.
+  - An "Open Browser" or "Attach Browser" container is created.
+
+Step 5: Record Clicking the Search Box
+  - In the Recording toolbar, click "Type".
+  - Click on Google's search input box.
+  - In the dialog that appears, type: UiPath RPA Tutorial
+  - Click OK.
+
+Step 6: Record Pressing Enter
+  - Click "Type" in the Recording toolbar.
+  - Click the search box again.
+  - In the dialog, leave text blank and set: [k(enter)]
+  - OR use "Send Hotkey" > Enter.
+
+Step 7: Stop Recording
+  - Press Escape or click "Save & Exit".
+  - UiPath generates the workflow.
+
+Step 8: Run
+  - Press F5.
+  - Chrome opens, types the search term, presses Enter.
+  - Google shows search results for "UiPath RPA Tutorial".
+
+EXPECTED OUTPUT:
+  Google Chrome displays search results for "UiPath RPA Tutorial".
+
+================================================================
+END OF PRACTICAL NO. 4
+================================================================
