@@ -1,0 +1,71 @@
+================================================================
+PRACTICAL 8(b) - Screen Scraping Methods in UiPath
+================================================================
+
+DIFFICULTY: Medium
+
+WHAT YOU WILL DO:
+You will extract text from a web page or application using 
+three different screen scraping methods:
+  (i)  Full Text
+  (ii) Native
+  (iii) OCR
+
+BEST TOOL FOR THIS: Open a simple website (e.g., https://example.com)
+in Chrome for scraping practice.
+
+Step 1: Open Chrome → navigate to https://example.com
+
+Step 2: Open UiPath Studio → New Project.
+  - Name it: Practical_8b_Scraping
+
+--- (i) FULL TEXT METHOD ---
+
+Step 3: From the Activities panel, drag a "Get Text" activity 
+        (or use the Screen Scraping Wizard from the Design ribbon).
+
+Step 4: Using Screen Scraping Wizard (easier):
+  - Click "Screen Scraping" in the top Design ribbon of UiPath Studio.
+  - Your screen dims → draw a rectangle around the text on the webpage
+    you want to scrape.
+  - UiPath will offer scraping method options — choose "FullText".
+  - Click Finish.
+  - A "Get Full Text" activity is added automatically.
+
+Step 5: The activity has an Output field.
+  - Press Ctrl+K on the output → name it: scrapedText
+
+Step 6: Drag a "Message Box" after the scraping activity.
+  - Text: scrapedText
+  - Run (F5) → see the full text extracted from the page.
+
+--- (ii) NATIVE METHOD ---
+
+Step 7: Again click "Screen Scraping" from the Design ribbon.
+  - Draw rectangle over different text on the webpage.
+  - When prompted for method, choose "Native".
+  - Click Finish.
+
+Step 8: This adds a "Get Native Text" activity.
+  - Output → Ctrl+K → name it: nativeText
+
+Step 9: Drag Message Box → Text: nativeText
+  - Run (F5) → Native scraping extracts text using UI Automation 
+    (more structured, works well with UI elements).
+
+--- (iii) OCR METHOD ---
+
+Step 10: Again click "Screen Scraping" from the Design ribbon.
+  - Draw rectangle over an image-based text or any text.
+  - When prompted, choose "OCR" (select Google OCR or Microsoft OCR).
+  - Click Finish.
+
+Step 11: Output → Ctrl+K → name it: ocrText
+Step 12: Drag Message Box → Text: ocrText
+  - Run (F5) → OCR reads text from images/scanned areas.
+
+KEY DIFFERENCE BETWEEN METHODS:
+  Full Text  → Fastest; reads all background text including hidden text
+  Native     → Accurate for standard UI apps; respects element structure
+  OCR        → Use when text is in images or non-standard apps
+
